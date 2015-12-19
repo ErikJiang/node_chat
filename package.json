@@ -1,0 +1,23 @@
+{
+  "name": "node_chat",
+  "version": "1.0.0",
+  "description": "chat room single-page web applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JiangInk/node_chat.git"
+  },
+  "author": "ink jiang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JiangInk/node_chat/issues"
+  },
+  "homepage": "https://github.com/JiangInk/node_chat",
+  "dependencies": {
+    "express": "^4.13.3",
+    "socket.io": "^1.3.7"
+  }
+}
