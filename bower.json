@@ -1,14 +1,11 @@
 {
   "name": "node_chat",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "homepage": "https://github.com/JiangInk/node_chat",
   "authors": [
     "JiangInk <JiangInk@foxmail.com>"
   ],
   "description": "chat room single-page web applications",
-  "moduleType": [
-    "globals"
-  ],
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -18,7 +15,10 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.6",
-    "angular": "~1.4.8"
+    "bootstrap": "~3.0.3",
+    "angular": "~1.2.5",
+    "angular-route": "~1.2.5",
+    "angular-moment": "~0.5.2"
   }
 }
+

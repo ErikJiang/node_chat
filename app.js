@@ -1,31 +1,91 @@
-/**
- * Created by jiangink on 15/12/19.
- */
 var express = require('express');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var app = express();
+var path = require('path');
+var signedCookieParser = cookieParser('nodeChat');
+var MongoStore = require('connect-mongo')(session);
+
+var config = require('./config');
+var api = require('./services/api');
+var socketApi = require('./services/socketApi');
+
 var port = process.env.PORT || 3000;
-
-app.use(express.static(__dirname + '/static'));
-
-app.use(function (req, res) {
-    res.sendfile('./static/index.html');
+var sessionStore = new MongoStore({
+  url: config.mongodb
 });
 
-var io = require('socket.io').listen(app.listen(port));
+var app = express();
 
-var messages = [];
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(cookieParser());
+app.use(session({
+  secret: 'technode',
+  resave: true,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 60 * 1000 * 60
+  },
+  store: sessionStore
+}));
 
-io.sockets.on('connection', function (socket) {
+if ('development' == app.get('env')) {
+  app.set('staticPath', '/static')
+} else {
+  app.set('staticPath', '/build')
+}
 
-    socket.on('getAllMessages', function() {
-        socket.emit('allMessages', messages);
-    });
+app.use(express.static(__dirname + app.get('staticPath')));
 
-    socket.on('createMessage', function (message) {
-        console.log('message>>:', message);
-        messages.push(message);
-        io.sockets.emit('messageAdded', message);
-    });
+app.post('/api/login', api.login);
+app.get('/api/logout', api.logout);
+app.get('/api/validate', api.validate);
+
+app.use(function(req, res) {
+    res.sendFile(path.join(__dirname, app.get('staticPath') + '/index.html'))
 });
 
-console.log('node_chat is on port '+ port +'!');
+var server = app.listen(port, function() {
+  console.log('NodeChat  is on port ' + port + '!')
+});
+
+var io = require('socket.io').listen(server);
+
+io.set('authorization', function(handshakeData, accept) {
+  signedCookieParser(handshakeData, {}, function(err) {
+    if (err) {
+      accept(err, false)
+    } else {
+      sessionStore.get(handshakeData.signedCookies['connect.sid'], function(err, session) {
+        if (err) {
+          accept(err.message, false)
+        } else {
+          handshakeData.session = session;
+          if (session._userId) {
+            accept(null, true)
+          } else {
+            accept('No login');
+          }
+        }
+      })
+    }
+  })
+
+});
+
+io.sockets.on('connection', function(socket) {
+
+  socketApi.connect(socket);
+
+  socket.on('disconnect', function() {
+    socketApi.disconnect(socket);
+  });
+
+  socket.on('nodechat', function(request) {
+    socketApi[request.action](request.data, socket, io);
+  })
+});
