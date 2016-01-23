@@ -8,17 +8,26 @@
 </head>
 <body>
     <div id="content">
-        <form style="margin-top: 70px" method="post">
-            <div class="form_line">
-                <div class="form_label">昵称：</div>
-                <input type="text" name="name"/>
-            </div>
-            <div class="form_line">
-                <div class="form_label"></div>
-                <button class="button gray" type="submit">登录</button>
-                <button class="button gray" type="reset">取消</button>
-            </div>
-        </form>
-    </div>
+      <form style="margin-top:70px;" action="/signin" method="post">
+        <div class="form_line">
+          <div class="form_label">登录昵称：</div>
+          <input type="text" name="username"/>
+        </div>
+        <div class="form_line">
+          <div class="form_label">输入密码：</div>
+          <input type="password" name="password"/>
+        </div>
+        <div class="form_line">
+          <div class="form_label"></div>
+          <button class="button gray" type="submit">登录</button>
+          <button class="button gray" type="reset">取消</button>
+        </div>
+        <div class="form_line">
+          <div class="form_label"></div>
+          还没有账号？
+          <a href="/signup">注册</a>
+        </div>
+      </form>
+  </div>
 </body>
 </html>

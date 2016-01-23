@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>node chat</title>
-    <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
-    <script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="/javascripts/chat.js"></script>
     <link type="text/css" rel='stylesheet' href='/stylesheets/common.css' />
@@ -20,7 +19,7 @@
                 <div id="toolbar"></div>
                 <div id="input_content" contenteditable="true"></div>
                 <div id="sayingto">
-                    您好 <span id="from"></span>, 您正在对 <span id="to"></span>说
+                    您好 &nbsp;&nbsp;<span data-index="<%= user._id %>" id="from"><%= user.username %></span>&nbsp;&nbsp;, 您正在对 &nbsp;&nbsp;<span id="to"></span>&nbsp;&nbsp;聊天
                 </div>
                 <div id="say">发送</div>
             </div>

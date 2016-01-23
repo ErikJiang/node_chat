@@ -1,0 +1,24 @@
+{
+  "name": "node_chat",
+  "description": "",
+  "main": "",
+  "authors": [
+    "JiangInk <JiangInk@foxmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "chat"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}

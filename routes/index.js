@@ -1,32 +1,71 @@
+var crypto = require('crypto');
 var usersRouter = require('./users');
+var userApi = require('../models/users.server.api');
 
-module.exports = function (app, users) {
+module.exports = function(app) {
+	/* GET home page. */
+	app.get('/', function(req, res, next) {
+		if (req.session.user == null) {
+			res.redirect('/signin');
+		}
+		else {
+			res.render('index', {
+				user: req.session.user
+			});	
+		}
+	});
 
-    /* GET home page. */
-    app.get('/', function(req, res, next) {
-        console.log("cookies: >>", req.cookies.user);
-        if (req.cookies.user == null) {
-            res.redirect('/signin');
-        }
-        else {
-            res.render('index');
-        }
-    });
+	/* Get signin page. */
+	app.get('/signin', function(req, res, next) {
+		res.render('signin');
+	});
 
-    app.get('/signin', function (req, res) {
-        res.render('signin');
-    });
+	/* Post signin request. */
+	app.post('/signin', function(req, res, next) {
+		var md5 = crypto.createHash('md5'),
+			password = md5.update(req.body.password).digest('hex');
+		userApi.findOneUser(req.body.username, function(err, user){
+			if(err) {
+				console.log('signin find user fail. ', err);
+				return res.send('find user fail.');
+			}
+			console.log('user:-> ',user)
+			if ((user == null) || (user.password != password)) {
+				res.send('username or password is wrong.');
+			}
+			else {
+				req.session.user = {
+					username: user.username,
+					_id: user._id
+				};
+				res.redirect('/');
+			}
+		});
+	});
 
-    app.post('/signin', function (req, res) {
-        if (users[req.body.name]) {
-            res.redirect('/signin');
-        }
-        else {
-            res.cookie('user', req.body.name, {maxAge: 1000*60*60*24*30});
-            res.redirect('/');
-        }
-    });
+	/* Get signup page. */
+	app.get('/signup', function(req, res, next) {
+		res.render('signup');
+	});
 
-    usersRouter(app, users);
+	/* Post signup request. */
+	app.post('/signup', function(req, res, next) {
+		var md5 = crypto.createHash('md5'),
+			password = md5.update(req.body.password).digest('hex');
+
+		if(req.body.password != req.body.confirm) {
+			return res.send('signup user password unmatch.');
+		}
+		userApi.addNewUser(req.body.username, password, function(err) {
+			if(err) {
+				console.log('add new user fail. ', err);
+				return res.send('add new user fail.');
+			}
+			res.redirect('/signin');
+		});
+	});
+
+	/* users router */
+	usersRouter(app);
 };
 
