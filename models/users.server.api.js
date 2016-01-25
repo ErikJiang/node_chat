@@ -14,6 +14,20 @@ exports.findOneUser = function(username, callback) {
 	});
 };
 
+/* 用户状态 online:1 offline:0 */
+exports.updateStatus = function(username, stateVal, callback) {
+	user.UserModel.update({
+		username: username
+		}, { 
+	 	$set: { isonline: stateVal }
+	 	}, function(err, data) {
+	 	if (err) {
+	 		return callback(err);
+	 	}
+	 	callback(null, data);
+	});
+};
+
 /* 添加新用户 */
 exports.addNewUser = function(name, pwd, callback) {
 	var userEntity = new user.UserModel({
@@ -30,7 +44,7 @@ exports.addNewUser = function(name, pwd, callback) {
 
 /* 获取用户列表 */
 exports.getUserList = function(callback) {
-	user.UserModel.find({}, function(err, users) {
+	user.UserModel.find({isonline: 1}, function(err, users) {
 		if (err) {
 			return callback(err);
 		}

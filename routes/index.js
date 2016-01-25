@@ -29,16 +29,21 @@ module.exports = function(app) {
 				console.log('signin find user fail. ', err);
 				return res.send('find user fail.');
 			}
-			console.log('user:-> ',user)
 			if ((user == null) || (user.password != password)) {
 				res.send('username or password is wrong.');
 			}
 			else {
-				req.session.user = {
-					username: user.username,
-					_id: user._id
-				};
-				res.redirect('/');
+				userApi.updateStatus(req.body.username, 1, function(err) {
+					if(err) {
+						console.log('signin update user status fail. ', err);
+						return res.send('update user status fail.');
+					}
+					req.session.user = {
+						username: user.username,
+						_id: user._id
+					};
+					res.redirect('/');
+				});
 			}
 		});
 	});
