@@ -6,30 +6,65 @@
     <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="/javascripts/chat.js"></script>
-    <link type="text/css" rel='stylesheet' href='/stylesheets/common.css' />
-    <link type="text/css" rel='stylesheet' href='/stylesheets/chat.css' />
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
   </head>
+
   <body>
-    <div id="contain">
-        <div id="content">
-            <div id="content_show">
-                <div id="contents"></div>
-            </div>
-            <div id="content_saying">
-                <div id="toolbar"></div>
-                <div id="input_content" contenteditable="true"></div>
-                <div id="sayingto">
-                    您好 &nbsp;&nbsp;<span data-index="<%= user._id %>" id="from"><%= user.username %></span>&nbsp;&nbsp;, 您正在对 &nbsp;&nbsp;<span data-index="" id="to"></span>&nbsp;&nbsp;聊天
-                </div>
-                <div id="send">发送</div>
-            </div>
+    <nav class="navbar navbar-default">
+      <div class="contaniner-fluid">
+        <div class="nabbar-header">
+          <a class="navbar-brand" href="/">NODE CHAT</a>
         </div>
-        <div id="users_online">
-            <div id="usersbar">
-                <div id="user_label">在线用户</div>
-                <div id="users_list">
-                    <ul id="list"></ul>
+        <div class="collapse navbar-collapse">
+          <p class="navbar-text navbar-right">
+          <i class="fa fa-user"></i>&nbsp;
+          <span data-index="<%= user._id %>" id="from"><%= user.username %></span>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          </p>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row" id="contain">
+            <div class="col-md-9 col-sm-9 col-xs-9" id="content">
+                <div class="panel panel-default" id="content-show">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">
+                        <i class="fa fa-comment"></i>
+                        &nbsp; 您正与 <span id="to"></span> 聊天：
+                      </h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="contents"></div>
+                    </div>
                 </div>
+                <hr/>
+                <div id="content-saying">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-pencil-square-o"></i>
+                      </span>
+                      <input id="input_content" class="form-control" placeholder="请输入聊天内容..."></input>
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="send">发送</button>
+                      </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-3" id="users_online">
+                <div class="panel panel-default" id="usersbar">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                    <i class="fa fa-users"></i>&nbsp; 用户列表
+                    </h4>
+                  </div>
+                  <div class="panel-body">
+                    <ul class="list-group" id="list" onselectstart="return false"></ul>
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
     </div>

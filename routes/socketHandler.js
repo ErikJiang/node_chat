@@ -18,7 +18,7 @@ function messageHandler(io) {
 		socket.on('online', function(data) {
 			console.log('server online receive msg', data);
 			//更新用户上线状态
-			userApi.updateStatus(socket.name, 1, function(err, user) {
+			userApi.updateStatus(data.user, 1, function(err) {
 				if(err) {
 					console.log('socket update user status fail. ', err);
 					return res.send('update user status fail.');

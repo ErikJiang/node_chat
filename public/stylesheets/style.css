@@ -1,8 +1,37 @@
-body {
-  padding: 50px;
+*{
+  padding: 0px; margin: 0px; 
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #333;
 }
 
-a {
-  color: #00B7FF;
+body{
+  height: 100%;
+  width: 100%;
+  background: url("../images/background.png") repeat-x #b8b6b6;
 }
+
+.navbar-brand img {
+  width: 50%; height: 50%;
+}
+
+#content, #users_online {
+  height: 80vh;
+}
+
+#content-show {
+  height: 85%;
+  overflow: scroll;
+}
+
+#content-saying {
+  height: 15%;
+}
+
+#users_online #usersbar {
+  height: 100%;
+}
+#users_online ul > li {
+  cursor: pointer;
+  -moz-user-select: none;
+}
+

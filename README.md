@@ -2,7 +2,7 @@
 
 Node.JS 聊天室应用
 
-本项目运用 Express &amp; Socket.IO &amp; ... ；
+本项目运用 Express &amp; Socket.IO &amp; MongoDB ；
 
 ## 如何使用
 
@@ -14,13 +14,14 @@ Node.JS 聊天室应用
 
 ### 如何运行
 
+首先运行 _MongoDB_ 服务：
+
+	mongod --config /usr/local/etc/mongod.conf
+
 直接运行 _Express_ 应用:
 
     ./bin/www
 
-### 演示地址
-
-...
 
 ---
 
