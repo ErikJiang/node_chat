@@ -94,7 +94,7 @@ $(document).ready(function() {
 	function appendContent(message) {
 		$("#contents").append(message);
 		// 将滑动条移至最下方显示最新信息
-		$("#content-show").scrollTop($("#content-show")[0].scrollHeight);
+		$("#contents").scrollTop($("#contents")[0].scrollHeight);
 	}
 
 	/* 刷新对话者昵称 */
@@ -130,5 +130,4 @@ $(document).ready(function() {
 			$('#input_content').val('').focus();
 		}
 	});
-
 });

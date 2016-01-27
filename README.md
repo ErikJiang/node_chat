@@ -2,6 +2,8 @@
 
 Node.JS 聊天室应用
 
+![node_chat](chat.jpg "chat root")
+
 本项目运用 Express &amp; Socket.IO &amp; MongoDB ；
 
 ## 如何使用
@@ -18,7 +20,7 @@ Node.JS 聊天室应用
 
 	mongod --config /usr/local/etc/mongod.conf
 
-直接运行 _Express_ 应用:
+然后运行 _Express_ 应用:
 
     ./bin/www
 

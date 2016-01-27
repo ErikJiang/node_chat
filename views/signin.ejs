@@ -1,33 +1,18 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>登录</title>
-    <link type="text/css" rel="stylesheet" href="/stylesheets/sign.css"/>
-    <link type="text/css" rel="stylesheet" href="/stylesheets/common.css"/>
-</head>
-<body>
-    <div id="content">
-      <form style="margin-top:70px;" action="/signin" method="post">
-        <div class="form_line">
-          <div class="form_label">登录昵称：</div>
-          <input type="text" name="username"/>
-        </div>
-        <div class="form_line">
-          <div class="form_label">输入密码：</div>
-          <input type="password" name="password"/>
-        </div>
-        <div class="form_line">
-          <div class="form_label"></div>
-          <button class="button gray" type="submit">登录</button>
-          <button class="button gray" type="reset">取消</button>
-        </div>
-        <div class="form_line">
-          <div class="form_label"></div>
-          还没有账号？
-          <a href="/signup">注册</a>
-        </div>
-      </form>
-  </div>
-</body>
-</html>
+
+<div class="part loginPart">
+    <form novalidate="novalidate" id="login" action="/signin" method="post">
+        <div id="register-active" class="switch"><i class="fa fa-toggle-on"></i>切换注册</div>
+        <h3>登录<p class="status"></p></h3>
+        <p>
+            <label class="icon" for="username"><i class="fa fa-user"></i></label>
+            <input aria-required="true" class="input-control" id="username" placeholder="请输入用户名" name="username" required="" type="text">
+        </p>
+        <p>
+            <label class="icon" for="password"><i class="fa fa-lock"></i></label>
+            <input aria-required="true" class="input-control" id="password" placeholder="请输入密码" name="password" required="" type="password">
+        </p>
+        <p>
+            <input class="submit" value="登录" name="submit" type="submit">
+        </p>  
+    </form>
+</div>

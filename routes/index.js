@@ -6,18 +6,13 @@ module.exports = function(app) {
 	/* GET home page. */
 	app.get('/', function(req, res, next) {
 		if (req.session.user == null) {
-			res.redirect('/signin');
+			res.render('sign');
 		}
 		else {
 			res.render('index', {
 				user: req.session.user
 			});	
 		}
-	});
-
-	/* Get signin page. */
-	app.get('/signin', function(req, res, next) {
-		res.render('signin');
 	});
 
 	/* Post signin request. */
@@ -30,7 +25,7 @@ module.exports = function(app) {
 				return res.send('find user fail.');
 			}
 			if ((user == null) || (user.password != password)) {
-				res.send('username or password is wrong.');
+				res.send('login parameter is wrong or user is signed in.');
 			}
 			else {
 				userApi.updateStatus(req.body.username, 1, function(err) {
@@ -48,11 +43,6 @@ module.exports = function(app) {
 		});
 	});
 
-	/* Get signup page. */
-	app.get('/signup', function(req, res, next) {
-		res.render('signup');
-	});
-
 	/* Post signup request. */
 	app.post('/signup', function(req, res, next) {
 		var md5 = crypto.createHash('md5'),
@@ -61,12 +51,12 @@ module.exports = function(app) {
 		if(req.body.password != req.body.confirm) {
 			return res.send('signup user password unmatch.');
 		}
-		userApi.addNewUser(req.body.username, password, function(err) {
+		userApi.addNewUser(req.body.username, req.body.useremail, password, function(err) {
 			if(err) {
 				console.log('add new user fail. ', err);
 				return res.send('add new user fail.');
 			}
-			res.redirect('/signin');
+			res.render('sign');
 		});
 	});
 

@@ -13,6 +13,63 @@ body{
 .navbar-brand img {
   width: 50%; height: 50%;
 }
+.navbar-color { 
+  background-color: #333;
+}
+.navbar-color .navbar-brand,
+.navbar-color p i,
+.navbar-color p span {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar-color .navbar-brand {
+  color: #00b5a9;
+}
+.input-group-btn .btn-default {
+  background-color: rgba(16, 177, 169, 0.8);
+  color: white;
+}
+.input-group-btn .btn-default:hover {
+  background-color: #00b5a9;
+}
+
+li.list-group-item-success {
+  background-color: rgba(16, 177, 169, 0.8);
+  color: white;
+}
+li.list-group-item-success i,
+li.list-group-item-success span {
+  color: white;
+}
+
+li.list-group-item-success:hover {
+  background-color: #00b5a9;
+}
+
+p.navbar-text {
+  transition: transform 1s;
+  -moz-transition: -moz-transform 1s; /* Firefox 4 */
+  -webkit-transition: -webkit-transform 1s; /* Safari and Chrome */
+}
+p.navbar-text:hover {
+  transform: rotateX(180deg);
+  -webkit-transform: rotateX(180deg); /* Safari 和 Chrome */
+  -moz-transform: rotateX(180deg);  /* Firefox */
+}
+
+i.fa {
+  transition: transform 1s;
+  -moz-transition: -moz-transform 1s; /* Firefox 4 */
+  -webkit-transition: -webkit-transform 1s; /* Safari and Chrome */
+  -o-transition: -o-transform 1s; /* Opera */
+}
+i.fa:hover {
+  transform:rotate(360deg);
+  -ms-transform:rotate(360deg); /* IE 9 */
+  -moz-transform:rotate(360deg); /* Firefox */
+  -webkit-transform:rotate(360deg); /* Safari and Chrome */
+  -o-transform:rotate(360deg); /* Opera */
+}
 
 #content, #users_online {
   height: 80vh;
@@ -20,7 +77,10 @@ body{
 
 #content-show {
   height: 85%;
-  overflow: scroll;
+}
+#contents {
+  height: 55vh;
+  overflow: auto;
 }
 
 #content-saying {
