@@ -78,16 +78,13 @@ gulp.task('default', ['clean'], function() {
 
 // 监听文件变动
 gulp.task('watch', function() {
+	// 监听文件变动
 	gulp.watch(srcPaths.scripts, ['scripts']);
 	gulp.watch(srcPaths.images, ['images']);
 	gulp.watch(srcPaths.styles, ['styles']);
-});
-
-// 监听自动刷新
-gulp.task('watch', function() {
 	// 创建 livereload 监听服务
 	livereload.listen();
-	// 若有改变就刷新
+	// 若有改变自动重载刷新
 	gulp.watch([destPaths.all]).on('change', livereload.changed);
 });
 
