@@ -21,7 +21,7 @@ $(document).ready(function() {
 			sys = '<div class=\"alert alert-success\" role=\"alert\">系统（'+ now() +'）：用户&nbsp;'+ data.user +'&nbsp;上线了！</div><br/>';
 		}
 		else {
-			sys = '<div class=\"alert alert-success\" role=\"alert\">系统（'+ now() +'）：欢迎您进入聊天室！</div><br/>'
+			sys = '<div class=\"alert alert-success\" role=\"alert\">系统（'+ now() +'）：欢迎您进入聊天室！</div><br/>';
 		}
 		appendContent(sys);
 		flushUserList(data.users);
@@ -114,7 +114,7 @@ $(document).ready(function() {
 	$('#send').click(function() {
 		var $msg = $('#input_content').val();
 		var text = '';
-		if($msg != "") {
+		if($msg !== "") {
 			if (to == 'all') {
 				text = '<div class=\"alert alert-info\" role=\"alert\">你&nbsp;(' + now() + ')&nbsp;对 所有人 说：<br/>' + $msg + '</div><br />';
 			}

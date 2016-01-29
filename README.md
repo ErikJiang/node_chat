@@ -24,6 +24,16 @@ Node.JS 聊天室应用
 
     ./bin/www
 
+### 如何构建
+
+使用 `gulp` 进行前端工程构建：
+
+*  构建命令： `gulp`
+
+*  清空命令： `gulp clean`
+
+*  监听命令： `gulp watch`
+
 
 ---
 
